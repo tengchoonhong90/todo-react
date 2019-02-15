@@ -3,6 +3,7 @@ class List extends React.Component {
     super()
     this.changeHandler = this.changeHandler.bind(this);
     this.addItem = this.addItem.bind(this);
+    this.delItem = this.delItem.bind(this);
     this.validations = this.validations.bind(this);
   }
 
@@ -55,17 +56,18 @@ class List extends React.Component {
     }
   }
 
+  delItem(index) {
+    this.state.list.splice(index, 1);
+		this.setState({ list: this.state.list })
+  }
+
   editItem(list, item, index) {
     if (this.validations()) {
       let newItem = this.state.list;
       newItem[index] = item
-      this.setState({ list: newItem});
+      this.setState({ list: newItem });
       this.setState({ word: "" })
     }
-  }
-
-  deleteItem() {
-    
   }
 
   render() {
@@ -73,7 +75,8 @@ class List extends React.Component {
       var mapper = this.state.list.map((item, index) => 
         <div key={index}>
           <li>{item}</li>
-          <button onClick={() => {this.editItem(this.state.list, this.state.word, index);}}>Edit item</button>
+          <button onClick={() => {this.delItem(index);}}>Delete item</button>
+          {/* <button onClick={() => {this.editItem(this.state.list, this.state.word, index);}}>Edit item</button> */}
         </div>
       );
 
