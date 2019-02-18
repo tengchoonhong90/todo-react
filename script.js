@@ -1,6 +1,30 @@
+class ListItem extends React.Component {
+  constructor() {
+    super();
+  }
+
+  editItem(list, item, index) {
+    // if (this.validations()) {
+      console.log("list: " + list + "   item: "+item+"  index: " + index)
+      let newItem = list;
+      newItem[index] = item
+      // this.setState({ list: newItem });
+      // this.setState({ word: "" })
+    // }
+  }
+  
+  render() {
+    return (
+      <div>
+      <button onClick={() => {this.editItem(this.props.list, this.props.item, this.props.index);}}>Edit item</button>
+      </div>
+    )
+  }
+}
+
 class List extends React.Component {
-  constructor(){
-    super()
+  constructor() {
+    super();
     this.changeHandler = this.changeHandler.bind(this);
     this.addItem = this.addItem.bind(this);
     this.delItem = this.delItem.bind(this);
@@ -61,14 +85,14 @@ class List extends React.Component {
 		this.setState({ list: this.state.list })
   }
 
-  editItem(list, item, index) {
-    if (this.validations()) {
-      let newItem = this.state.list;
-      newItem[index] = item
-      this.setState({ list: newItem });
-      this.setState({ word: "" })
-    }
-  }
+  // editItem(list, item, index) {
+  //   if (this.validations()) {
+  //     let newItem = this.state.list;
+  //     newItem[index] = item
+  //     this.setState({ list: newItem });
+  //     this.setState({ word: "" })
+  //   }
+  // }
 
   render() {
       // render the list with a map() here
@@ -77,6 +101,7 @@ class List extends React.Component {
           <li>{item}</li>
           <button onClick={() => {this.delItem(index);}}>Delete item</button>
           {/* <button onClick={() => {this.editItem(this.state.list, this.state.word, index);}}>Edit item</button> */}
+          <ListItem item={this.state.word} index={index} list={this.state.list}/>
         </div>
       );
 
